@@ -12,8 +12,14 @@ public class ColumnsFamilies {
     }
 
     public static final ColumnFamily<UUID, String> CF_RECIPE =
-            new ColumnFamily<UUID, String>(
+            new ColumnFamily<>(
                     "recipe",
+                    UUIDSerializer.get(),
+                    StringSerializer.get());
+
+    public static final ColumnFamily<UUID, String> CF_INGREDIENT_BY_RECIPE =
+            new ColumnFamily<>(
+                    "ingredient_by_recipe",
                     UUIDSerializer.get(),
                     StringSerializer.get());
 }

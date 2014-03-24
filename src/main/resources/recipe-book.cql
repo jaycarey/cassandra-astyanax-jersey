@@ -10,10 +10,10 @@ create columnfamily recipe_book.recipe (
 	PRIMARY KEY (id)
 );
 
-create columnfamily recipe_book.ingredients_by_recipe (
+create columnfamily recipe_book.ingredient_by_recipe (
     recipe_id TimeUUID,
 	name text,
 	quantity int,
-	units text,
-	PRIMARY KEY (recipe_id)
+	unit text,
+	PRIMARY KEY (recipe_id, name)
 );

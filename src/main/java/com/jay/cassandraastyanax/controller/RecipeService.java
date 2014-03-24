@@ -1,25 +1,16 @@
-/**
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
- */
 package com.jay.cassandraastyanax.controller;
 
 import com.google.common.base.Optional;
 import com.jay.cassandraastyanax.KeyspaceFactory;
+import com.jay.cassandraastyanax.dao.IngredientDao;
 import com.jay.cassandraastyanax.dao.RecipeDao;
+import com.jay.cassandraastyanax.domain.Ingredient;
 import com.jay.cassandraastyanax.domain.Recipe;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 import java.util.UUID;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -29,23 +20,22 @@ public class RecipeService {
 
     private final RecipeDao recipeDao;
 
-    public RecipeService() {
-        recipeDao = new RecipeDao(new KeyspaceFactory());
-    }
+    private final IngredientDao ingredientDao;
 
-//    @GET
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public List<ISP> getISPs() {
-//        return recipeDao.;
-//    }
+    public RecipeService() {
+        KeyspaceFactory keyspaceFactory = new KeyspaceFactory();
+        recipeDao = new RecipeDao(keyspaceFactory);
+        ingredientDao = new IngredientDao(keyspaceFactory);
+    }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     public Recipe getRecipe(@PathParam("id") UUID id) {
-        Optional<Recipe> retrieve = recipeDao.retrieve(id);
-        System.out.println("Found: " + retrieve.orNull());
-        return retrieve.orNull();
+        Optional<Recipe> recipe = recipeDao.retrieve(id);
+        List<Ingredient> ingredients = ingredientDao.ingredientsForRecipe(id);
+        System.out.println("Found: " + recipe.orNull());
+        return recipe.isPresent() ? new RecipeAndIngredients(recipe.get(), ingredients) : null;
     }
 
     @PUT
