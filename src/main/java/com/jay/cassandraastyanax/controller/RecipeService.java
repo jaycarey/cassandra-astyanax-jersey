@@ -6,16 +6,27 @@ import com.jay.cassandraastyanax.dao.IngredientDao;
 import com.jay.cassandraastyanax.dao.RecipeDao;
 import com.jay.cassandraastyanax.domain.Ingredient;
 import com.jay.cassandraastyanax.domain.Recipe;
+import com.sun.jersey.api.core.HttpContext;
+import com.sun.jersey.core.spi.component.ComponentContext;
+import com.sun.jersey.core.spi.component.ComponentScope;
+import com.sun.jersey.server.impl.inject.AbstractHttpContextInjectable;
+import com.sun.jersey.spi.inject.Injectable;
+import com.sun.jersey.spi.inject.InjectableProvider;
+import com.sun.jersey.spi.resource.Singleton;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.ext.Provider;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.UUID;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 @Path("/recipe")
+@Singleton
 public class RecipeService {
 
     private final RecipeDao recipeDao;
@@ -23,9 +34,16 @@ public class RecipeService {
     private final IngredientDao ingredientDao;
 
     public RecipeService() {
-        KeyspaceFactory keyspaceFactory = new KeyspaceFactory();
-        recipeDao = new RecipeDao(keyspaceFactory);
-        ingredientDao = new IngredientDao(keyspaceFactory);
+        this(new KeyspaceFactory());
+    }
+
+    private RecipeService(KeyspaceFactory keyspaceFactory) {
+        this(new RecipeDao(keyspaceFactory), new IngredientDao(keyspaceFactory));
+    }
+
+    public RecipeService(RecipeDao recipeDao, IngredientDao ingredientDao) {
+        this.recipeDao = recipeDao;
+        this.ingredientDao = ingredientDao;
     }
 
     @GET
@@ -53,5 +71,4 @@ public class RecipeService {
         recipeDao.remove(id);
         return Response.ok().build();
     }
-
 }

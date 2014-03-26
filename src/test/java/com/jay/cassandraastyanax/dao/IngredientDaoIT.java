@@ -1,7 +1,8 @@
-package com.jay.cassandraastyanax.domain;
+package com.jay.cassandraastyanax.dao;
 
 import com.jay.cassandraastyanax.KeyspaceFactory;
 import com.jay.cassandraastyanax.dao.IngredientDao;
+import com.jay.cassandraastyanax.domain.Ingredient;
 import org.apache.cassandra.utils.UUIDGen;
 import org.junit.Before;
 import org.junit.Test;

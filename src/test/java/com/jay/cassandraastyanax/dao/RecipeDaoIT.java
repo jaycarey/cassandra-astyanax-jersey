@@ -1,8 +1,9 @@
-package com.jay.cassandraastyanax.domain;
+package com.jay.cassandraastyanax.dao;
 
 import com.google.common.base.Optional;
 import com.jay.cassandraastyanax.KeyspaceFactory;
 import com.jay.cassandraastyanax.dao.RecipeDao;
+import com.jay.cassandraastyanax.domain.Recipe;
 import org.junit.Before;
 import org.junit.Test;
 

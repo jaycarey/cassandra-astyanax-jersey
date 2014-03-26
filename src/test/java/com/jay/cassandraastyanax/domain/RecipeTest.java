@@ -1,4 +1,4 @@
-package com.jay.cassandraastyanax;
+package com.jay.cassandraastyanax.domain;
 
 import com.jay.cassandraastyanax.domain.Recipe;
 import org.junit.Before;
