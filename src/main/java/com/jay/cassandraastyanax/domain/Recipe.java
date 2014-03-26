@@ -8,7 +8,6 @@ import java.util.UUID;
 /**
  * @author jaycarey
  */
-@XmlRootElement
 public class Recipe {
 
     private String name;

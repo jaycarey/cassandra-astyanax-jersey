@@ -14,6 +14,10 @@ public class RecipeAndIngredients extends Recipe {
 
     private final List<Ingredient> ingredients;
 
+    public RecipeAndIngredients() {
+        ingredients = null;
+    }
+
     public RecipeAndIngredients(Recipe recipe, List<Ingredient> ingredients) {
         super(recipe);
         this.ingredients = ingredients;
