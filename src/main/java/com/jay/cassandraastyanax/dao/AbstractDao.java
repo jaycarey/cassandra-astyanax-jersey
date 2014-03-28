@@ -1,7 +1,7 @@
 package com.jay.cassandraastyanax.dao;
 
 import com.google.common.base.Optional;
-import com.jay.cassandraastyanax.KeyspaceFactory;
+import com.jay.cassandraastyanax.domain.KeyspaceFactory;
 import com.netflix.astyanax.Keyspace;
 import com.netflix.astyanax.model.Row;
 import com.netflix.astyanax.model.Rows;

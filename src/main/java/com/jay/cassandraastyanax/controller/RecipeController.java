@@ -1,11 +1,12 @@
 package com.jay.cassandraastyanax.controller;
 
 import com.google.common.base.Optional;
-import com.jay.cassandraastyanax.KeyspaceFactory;
 import com.jay.cassandraastyanax.dao.IngredientDao;
 import com.jay.cassandraastyanax.dao.RecipeDao;
 import com.jay.cassandraastyanax.domain.Ingredient;
+import com.jay.cassandraastyanax.domain.KeyspaceFactory;
 import com.jay.cassandraastyanax.domain.Recipe;
+import com.jay.cassandraastyanax.exception.SystemException;
 import com.sun.jersey.api.view.Viewable;
 import com.sun.jersey.spi.resource.Singleton;
 
@@ -19,21 +20,21 @@ import static javax.ws.rs.core.MediaType.*;
 
 @Path("/recipe")
 @Singleton
-public class RecipeService {
+public class RecipeController {
 
     private final RecipeDao recipeDao;
 
     private final IngredientDao ingredientDao;
 
-    public RecipeService() {
+    public RecipeController() {
         this(new KeyspaceFactory());
     }
 
-    private RecipeService(KeyspaceFactory keyspaceFactory) {
+    private RecipeController(KeyspaceFactory keyspaceFactory) {
         this(new RecipeDao(keyspaceFactory), new IngredientDao(keyspaceFactory));
     }
 
-    public RecipeService(RecipeDao recipeDao, IngredientDao ingredientDao) {
+    public RecipeController(RecipeDao recipeDao, IngredientDao ingredientDao) {
         this.recipeDao = recipeDao;
         this.ingredientDao = ingredientDao;
     }
@@ -55,11 +56,12 @@ public class RecipeService {
     }
 
     @PUT
-    @Consumes(APPLICATION_JSON)
-    public Response addRecipe(Recipe recipe) {
-        checkNotNull(recipe);
-        System.out.println("Creating Recipe: " + recipe.toString());
-        return Response.ok().entity(recipe.getId()).build();
+    @Path("/{id}")
+    @Consumes({APPLICATION_JSON, APPLICATION_XML})
+    public Response addRecipe(RecipeAndIngredients recipeAndIngredients) {
+        checkNotNull(recipeAndIngredients);
+        System.out.println("Creating Recipe: " + recipeAndIngredients.toString());
+        return Response.ok().entity(recipeAndIngredients.getId()).build();
     }
 
     @DELETE
@@ -69,4 +71,5 @@ public class RecipeService {
         recipeDao.remove(id);
         return Response.ok().build();
     }
+
 }

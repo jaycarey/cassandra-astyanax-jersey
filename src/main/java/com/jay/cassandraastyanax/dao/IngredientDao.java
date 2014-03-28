@@ -1,6 +1,6 @@
 package com.jay.cassandraastyanax.dao;
 
-import com.jay.cassandraastyanax.KeyspaceFactory;
+import com.jay.cassandraastyanax.domain.KeyspaceFactory;
 import com.jay.cassandraastyanax.domain.Ingredient;
 import com.jay.cassandraastyanax.exception.SystemException;
 import com.netflix.astyanax.connectionpool.exceptions.ConnectionException;

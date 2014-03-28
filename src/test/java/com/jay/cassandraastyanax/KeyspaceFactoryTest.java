@@ -1,5 +1,6 @@
 package com.jay.cassandraastyanax;
 
+import com.jay.cassandraastyanax.domain.KeyspaceFactory;
 import com.netflix.astyanax.Keyspace;
 import org.junit.Before;
 import org.junit.Test;

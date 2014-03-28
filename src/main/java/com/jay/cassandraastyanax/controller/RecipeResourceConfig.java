@@ -9,9 +9,9 @@ import java.util.Map;
 /**
  * @author jaycarey
  */
-public class MediaTypeMappings extends PackagesResourceConfig {
+public class RecipeResourceConfig extends PackagesResourceConfig {
 
-    public MediaTypeMappings() {
+    public RecipeResourceConfig() {
         super("com.jay.cassandraastyanax");
     }
 

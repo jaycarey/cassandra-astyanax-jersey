@@ -12,7 +12,7 @@ import java.util.List;
 @XmlRootElement
 public class RecipeAndIngredients extends Recipe {
 
-    private final List<Ingredient> ingredients;
+    private List<Ingredient> ingredients;
 
     public RecipeAndIngredients() {
         ingredients = null;
@@ -26,4 +26,10 @@ public class RecipeAndIngredients extends Recipe {
     public List<Ingredient> getIngredients() {
         return ingredients;
     }
+
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+
 }

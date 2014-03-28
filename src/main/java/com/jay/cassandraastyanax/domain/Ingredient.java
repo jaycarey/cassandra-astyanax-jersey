@@ -15,6 +15,9 @@ public class Ingredient {
 
     private String unit;
 
+    public Ingredient() {
+    }
+
     public Ingredient(UUID recipeId, String name, int quantity, String unit) {
         this.recipeId = recipeId;
         this.name = name;

@@ -1,4 +1,4 @@
-package com.jay.cassandraastyanax;
+package com.jay.cassandraastyanax.domain;
 
 import com.netflix.astyanax.AstyanaxContext;
 import com.netflix.astyanax.Keyspace;

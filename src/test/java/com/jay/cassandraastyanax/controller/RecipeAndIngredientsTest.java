@@ -2,6 +2,7 @@ package com.jay.cassandraastyanax.controller;
 
 import com.jay.cassandraastyanax.domain.Ingredient;
 import com.jay.cassandraastyanax.domain.Recipe;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,6 +38,19 @@ public class RecipeAndIngredientsTest {
     public void canConstructRecipeAndIngredientsFromRecipeAndIngredients() throws Exception {
         assertThat(recipeAndIngredients, comparesTo(recipe).onAllFields());
         assertThat(recipeAndIngredients.getIngredients(), equalTo(ingredients));
+    }
+
+    @Test
+    public void canSerialiseAndDeserialise() throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        String json = objectMapper.writeValueAsString(recipeAndIngredients);
+
+        RecipeAndIngredients deserialised = objectMapper.readValue(json, RecipeAndIngredients.class);
+
+        assertThat(deserialised, comparesTo(recipeAndIngredients).onAllFields().exceptFor("ingredients"));
+        assertThat(deserialised.getIngredients().get(0), comparesTo(recipeAndIngredients.getIngredients().get(0)).onAllFields());
+        assertThat(deserialised.getIngredients().get(1), comparesTo(recipeAndIngredients.getIngredients().get(1)).onAllFields());
     }
 
 }
