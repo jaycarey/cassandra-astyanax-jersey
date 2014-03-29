@@ -9,7 +9,7 @@ public class ExceptionDto {
 
     private final List<String> frames;
 
-    public ExceptionDto(Exception exception) {
+    public ExceptionDto(Throwable exception) {
         message = exception.getMessage();
         frames = new ArrayList<>();
         for (StackTraceElement stackTraceElement : exception.getStackTrace()) {

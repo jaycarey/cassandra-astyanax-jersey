@@ -4,11 +4,11 @@
 <html>
 <head>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css"/>
-    <title>${it.name}</title>
+    <title>${it.recipe.name}</title>
 </head>
 <body>
 <div class="jumbotron">
-    <h1>${it.name}</h1>
+    <h1>${it.recipe.name}</h1>
 
     <ul>
         <c:forEach items="${it.ingredients}" var="ingredient">

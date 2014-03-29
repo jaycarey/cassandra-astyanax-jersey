@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import static com.jay.cassandraastyanax.TestUtils.matchesPattern;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
@@ -38,8 +39,10 @@ public class RecipeTest {
     @Test
     public void recipesCanBeCompared() throws Exception {
         Recipe copy = new Recipe(recipe);
+        Recipe different = new Recipe();
 
-        assertThat(recipe.getId(), equalTo(copy.getId()));
+        assertThat(recipe, equalTo(copy));
+        assertThat(recipe, not(equalTo(different)));
     }
 
     @Test

@@ -10,16 +10,17 @@ import java.util.List;
  * @author jaycarey
  */
 @XmlRootElement
-public class RecipeAndIngredients extends Recipe {
+public class RecipeAndIngredients {
+
+    private Recipe recipe;
 
     private List<Ingredient> ingredients;
 
     public RecipeAndIngredients() {
-        ingredients = null;
     }
 
     public RecipeAndIngredients(Recipe recipe, List<Ingredient> ingredients) {
-        super(recipe);
+        this.recipe = recipe;
         this.ingredients = ingredients;
     }
 
@@ -31,5 +32,11 @@ public class RecipeAndIngredients extends Recipe {
         this.ingredients = ingredients;
     }
 
+    public Recipe getRecipe() {
+        return recipe;
+    }
 
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
+    }
 }

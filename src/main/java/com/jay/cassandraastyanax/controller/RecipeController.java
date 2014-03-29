@@ -6,10 +6,9 @@ import com.jay.cassandraastyanax.dao.RecipeDao;
 import com.jay.cassandraastyanax.domain.Ingredient;
 import com.jay.cassandraastyanax.domain.KeyspaceFactory;
 import com.jay.cassandraastyanax.domain.Recipe;
-import com.jay.cassandraastyanax.exception.SystemException;
-import com.sun.jersey.api.view.Viewable;
-import com.sun.jersey.spi.resource.Singleton;
+import org.glassfish.jersey.server.mvc.Viewable;
 
+import javax.inject.Singleton;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -60,8 +59,11 @@ public class RecipeController {
     @Consumes({APPLICATION_JSON, APPLICATION_XML})
     public Response addRecipe(RecipeAndIngredients recipeAndIngredients) {
         checkNotNull(recipeAndIngredients);
-        System.out.println("Creating Recipe: " + recipeAndIngredients.toString());
-        return Response.ok().entity(recipeAndIngredients.getId()).build();
+        recipeDao.persist(recipeAndIngredients.getRecipe());
+        for (Ingredient ingredient : recipeAndIngredients.getIngredients()) {
+            ingredientDao.persist(ingredient);
+        }
+        return Response.ok().entity(recipeAndIngredients.getRecipe().getId()).build();
     }
 
     @DELETE

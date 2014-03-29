@@ -8,9 +8,6 @@ import java.util.UUID;
 
 public class ColumnsFamilies {
 
-    private ColumnsFamilies() {
-    }
-
     public static final ColumnFamily<UUID, String> CF_RECIPE =
             new ColumnFamily<>(
                     "recipe",

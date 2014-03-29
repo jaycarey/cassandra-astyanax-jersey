@@ -2,7 +2,7 @@ package com.jay.cassandraastyanax.controller;
 
 import com.jay.cassandraastyanax.dto.ExceptionDto;
 import com.jay.cassandraastyanax.exception.SystemException;
-import com.sun.jersey.api.view.Viewable;
+import org.glassfish.jersey.server.mvc.Viewable;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

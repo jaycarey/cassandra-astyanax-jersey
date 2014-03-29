@@ -36,7 +36,7 @@ public class RecipeAndIngredientsTest {
 
     @Test
     public void canConstructRecipeAndIngredientsFromRecipeAndIngredients() throws Exception {
-        assertThat(recipeAndIngredients, comparesTo(recipe).onAllFields());
+        assertThat(recipeAndIngredients.getRecipe(), comparesTo(recipe).onAllFields());
         assertThat(recipeAndIngredients.getIngredients(), equalTo(ingredients));
     }
 

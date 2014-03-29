@@ -2,8 +2,9 @@ package com.jay.cassandraastyanax.domain;
 
 import org.apache.cassandra.utils.UUIDGen;
 
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.UUID;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * @author jaycarey
@@ -15,11 +16,11 @@ public class Recipe {
     private UUID id;
 
     public Recipe() {
+        this (UUIDGen.getTimeUUID(), null);
     }
 
     public Recipe(String name) {
-        this.name = name;
-        id = UUIDGen.getTimeUUID();
+        this (UUIDGen.getTimeUUID(), name);
     }
 
     public Recipe(Recipe recipe) {
@@ -39,11 +40,29 @@ public class Recipe {
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Recipe recipe = (Recipe) o;
+
+        if (!id.equals(recipe.id)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
+
     public UUID getId() {
         return id;
     }
 
     public void setId(UUID id) {
+        checkNotNull(id);
         this.id = id;
     }
 
@@ -52,6 +71,7 @@ public class Recipe {
     }
 
     public void setName(String name) {
+        checkNotNull(name);
         this.name = name;
     }
 }

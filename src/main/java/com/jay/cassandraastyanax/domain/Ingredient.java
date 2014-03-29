@@ -7,15 +7,19 @@ import java.util.UUID;
  */
 public class Ingredient {
 
-    private UUID recipeId;
+    private final UUID recipeId;
 
-    private String name;
+    private final String name;
 
-    private int quantity;
+    private final int quantity;
 
-    private String unit;
+    private final String unit;
 
+    /**
+     * Default constructor required by jackson.
+     */
     public Ingredient() {
+        this (null, null, -1, null);
     }
 
     public Ingredient(UUID recipeId, String name, int quantity, String unit) {
@@ -39,6 +43,26 @@ public class Ingredient {
 
     public String getUnit() {
         return unit;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Ingredient that = (Ingredient) o;
+
+        if (!name.equals(that.name)) return false;
+        if (!recipeId.equals(that.recipeId)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = recipeId.hashCode();
+        result = 31 * result + name.hashCode();
+        return result;
     }
 
     @Override
